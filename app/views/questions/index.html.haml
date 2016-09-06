@@ -1,0 +1,7 @@
+.container
+  %h2
+    = link_to 'Ask us!', new_question_path, remote: true
+  %br
+  #question-form
+  #questions
+    = render @questions

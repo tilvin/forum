@@ -1,0 +1,21 @@
+%p
+  = "Posted on #{question.created_at.strftime("%c")}"
+  %u
+    = "by #{question.user.email}"
+%h3
+  = question.title
+%p.lead{style: 'font-size: 18px'}
+  = question.content
+.col-lg-1
+.col-lg-11
+  %h3
+    Answers:
+  %div{id: "answers-#{question.id}"}
+    = render question.answers
+  %p
+    %div{id: "answer-form-#{question.id}"}
+
+- if question.user == current_user
+  = link_to 'destroy', question_path(question), method: :delete, class: "btn btn-danger active"
+= link_to 'give an answer', new_question_answer_path(question), remote: true, class: "btn btn-primary active"
+%hr

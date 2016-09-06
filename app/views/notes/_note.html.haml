@@ -1,0 +1,17 @@
+%p
+  .text-right.lead{style: 'font-size: 16px'}
+    = note.content
+    %br
+    %u
+      = "by #{note.user.email}"
+    %p
+      - if note.agreement
+        = link_to "accepted", '#', class: 'accepted', data: { note_id: note.id }
+        = "at #{note.updated_at.strftime("%c")}"
+      - elsif note.agreement == false
+        = "deny at #{note.updated_at.strftime("%c")}"
+
+    %p
+      - if current_user == note.answer.user
+        = link_to 'agree', question_answer_note_agree_path(note.answer.question, note.answer, note), method: :put
+        = link_to 'disagree', question_answer_note_disagree_path(note.answer.question, note.answer, note), method: :put

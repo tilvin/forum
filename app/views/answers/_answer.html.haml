@@ -1,0 +1,17 @@
+%p.lead.bg-info{style: 'font-size: 18px'}
+  = answer.content
+  - answer.notes.agree.each do |note|
+    %span{id: "note-#{note.id}"}
+      = note.content
+  %br
+  %u
+    = "by #{answer.user.email}"
+
+%div{id: "notes-#{answer.id}"}
+  - answer.notes.each do |note|
+    = render note
+
+%p
+  %div{id: "note-form-#{answer.id}"}
+  = link_to 'give a note', new_question_answer_note_path(answer.question, answer), remote: true, class: "btn btn-success active"
+%br
