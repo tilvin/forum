@@ -12,7 +12,6 @@ class NotesController < ApplicationController
   def create
     @note = @answer.notes.new(note_params)
     authorize @note
-
     @note.user = current_user
     @note.save
     puts @note.errors.full_messages

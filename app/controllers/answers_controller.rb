@@ -9,9 +9,10 @@ class AnswersController < ApplicationController
   end
 
   def create
+
     @answer = @question.answers.new(answer_params)
-    authorize @answer
     @answer.user = current_user
+    authorize @answer
     @answer.save
   end
 
